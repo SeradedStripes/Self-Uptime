@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Uptime Docs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="docs-page">
+    <header>
+        <div class="header-content">
+            <h1>Self Uptime Docs</h1>
+            <p class="subtitle">Full reference for the public API</p>
+        </div>
+        <div class="header-controls">
+            <div class="theme-switcher" id="themeSwitcher">
+                <button id="themeSwitcherBtn" class="theme-switcher-btn">☀️ Light</button>
+                <div class="theme-menu">
+                    <button class="theme-menu-item active" data-theme="light">☀️ Light</button>
+                    <button class="theme-menu-item" data-theme="dark">🌙 Dark</button>
+                    <button class="theme-menu-item" data-theme="cloudflare">☁️ Cloudflare</button>
+                </div>
+            </div>
+            <a class="btn btn-secondary" href="index.html" data-transition>Back to Dashboard</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="docs-hero">
+            <h1>API Overview</h1>
+            <p>Every endpoint returns JSON with a timestamp and a structured data object. Use the base endpoint to fetch all services, or the service endpoint for one target.</p>
+        </section>
+
+        <section class="docs-grid">
+            <article class="docs-card">
+                <h2>Base Endpoint</h2>
+                <p>Returns the latest checks for all services.</p>
+                <code>/api/v1/status/</code>
+            </article>
+
+            <article class="docs-card">
+                <h2>Service Endpoint</h2>
+                <p>Returns a single service result by slug.</p>
+                <code>/api/v1/status/{service}/</code>
+                <div class="docs-list">
+                    <span>Example: /api/v1/status/cloudflare/</span>
+                    <span>Example: /api/v1/status/steam/</span>
+                </div>
+            </article>
+
+            <article class="docs-card">
+                <h2>Response Shape</h2>
+                <p>Example response fields.</p>
+                <code>{ "success": true, "timestamp": "...", "data": { "status": "online", "responseTime": 123 } }</code>
+            </article>
+
+            <article class="docs-card">
+                <h2>Service Slugs</h2>
+                <p>Available service IDs.</p>
+                <div class="docs-list">
+                    <span>self, github-pages, github-status, cloudflare, aws</span>
+                    <span>discord, google, twitter, microsoft, azure, slack</span>
+                    <span>steam, epic-games, fortnite, minecraft</span>
+                    <span>twitch, youtube, hackclub, flavortown, scraps, blueprint</span>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 SeradedStripes — Public API available at /api/v1/status/</p>
+        </div>
+    </footer>
+
+    <script src="ui/themes.js"></script>
+    <script>
+        document.querySelectorAll('[data-transition]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (!href) return;
+                event.preventDefault();
+                document.body.classList.add('page-fade-out');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 200);
+            });
+        });
+
+        // Setup theme switcher for docs page
+        const themeSwitcherBtn = document.getElementById('themeSwitcherBtn');
+        const themeMenuItems = document.querySelectorAll('.theme-menu-item');
+
+        if (themeSwitcherBtn) {
+            themeSwitcherBtn.addEventListener('click', () => {
+                if (typeof Themes !== 'undefined') {
+                    Themes.toggleThemeMenu();
+                }
+            });
+        }
+
+        themeMenuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const theme = e.target.dataset.theme;
+                if (theme && typeof Themes !== 'undefined') {
+                    Themes.setTheme(theme);
+                    Themes.closeThemeMenu();
+                }
+            });
+        });
+
+        // Close theme menu on click outside
+        document.addEventListener('click', (e) => {
+            const themeSwitcher = document.getElementById('themeSwitcher');
+            if (themeSwitcher && !themeSwitcher.contains(e.target)) {
+                if (typeof Themes !== 'undefined') {
+                    Themes.closeThemeMenu();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

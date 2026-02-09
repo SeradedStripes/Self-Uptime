@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint Status</title>
+</head>
+<body>
+<pre id="output">Loading...</pre>
+
+<script>
+    function setOutput(payload) {
+        document.getElementById('output').textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function run() {
+        try {
+            const data = await CheckAPI.checkService('blueprint');
+            setOutput({
+                success: true,
+                timestamp: new Date().toISOString(),
+                data
+            });
+        } catch (error) {
+            setOutput({
+                success: false,
+                error: error.message,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+
+    (function loadCheckApi() {
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        const root = parts.length === 0 ? window.location.origin + '/' : window.location.origin + '/' + parts[0] + '/';
+        const script = document.createElement('script');
+        script.src = '/api/v1/check.js';
+        script.onload = run;
+        script.onerror = () => setOutput({
+            success: false,
+            error: 'Failed to load api/v1/check.js',
+            timestamp: new Date().toISOString()
+        });
+        document.head.appendChild(script);
+    })();
+</script>
+</body>
+</html>

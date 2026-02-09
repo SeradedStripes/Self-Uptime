@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Services - Self Uptime Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-category="self">
+    <header>
+        <div class="header-content">
+            <h1>Self Uptime Monitor</h1>
+            <p class="subtitle">Self Services</p>
+        </div>
+        <div class="header-controls">
+            <button id="checkBtn" class="btn btn-primary">Check Now</button>
+            <button id="resetBtn" class="btn btn-secondary">Reset</button>
+            <div class="theme-switcher" id="themeSwitcher">
+                <button id="themeSwitcherBtn" class="theme-switcher-btn">☀️ Light</button>
+                <div class="theme-menu">
+                    <button class="theme-menu-item active" data-theme="light">☀️ Light</button>
+                    <button class="theme-menu-item" data-theme="dark">🌙 Dark</button>
+                    <button class="theme-menu-item" data-theme="cloudflare">☁️ Cloudflare</button>
+                </div>
+            </div>
+            <a class="btn btn-secondary" href="docs.html" data-transition>Docs</a>
+        </div>
+    </header>
+
+    <div class="filter-bar">
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search services...">
+        </div>
+        <div class="sort-container">
+            <label class="sort-label" for="sortSelect">Sort</label>
+            <select id="sortSelect" class="sort-select">
+                <option value="default">Default</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+                <option value="response-asc">Response: Low to High</option>
+                <option value="response-desc">Response: High to Low</option>
+                <option value="uptime-desc">Uptime: High to Low</option>
+                <option value="uptime-asc">Uptime: Low to High</option>
+            </select>
+        </div>
+        <div class="category-filters">
+            <a href="index.html" class="filter-btn active" data-transition data-category="all">All</a>
+            <button class="filter-btn" data-category="self">Self</button>
+            <button class="filter-btn" data-category="cloud">Cloud</button>
+            <button class="filter-btn" data-category="social">Social</button>
+            <button class="filter-btn" data-category="gaming">Gaming</button>
+            <button class="filter-btn" data-category="video">Video</button>
+            <button class="filter-btn" data-category="github">GitHub</button>
+            <button class="filter-btn" data-category="network">Network</button>
+            <button class="filter-btn" data-category="community">Community</button>
+            <button class="filter-btn" data-category="useless">Useless</button>
+            <button class="filter-btn" data-category="ai">AI</button>
+            <button class="filter-btn" data-category="other">Other</button>
+        </div>
+        <div class="status-filters">
+            <button class="filter-btn" data-status="healthy">✓ Healthy</button>
+            <button class="filter-btn" data-status="degraded">⚠ Degraded</button>
+            <button class="filter-btn" data-status="offline">✗ Offline</button>
+        </div>
+        <div class="export-container">
+            <div class="export-dropdown">
+                <button id="exportBtn" class="btn btn-secondary dropdown-toggle">Export ▼</button>
+                <div class="dropdown-menu" id="exportMenu">
+                    <button class="dropdown-item" data-action="copy">Copy to Clipboard</button>
+                    <button class="dropdown-item" data-action="download">Download .JSON</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="monitors-grid">
+        <div class="monitor-card" data-service="self" data-category="useless" data-name="Self Uptime">
+            <div class="monitor-header">
+                <h2>Self Uptime</h2>
+                <span class="service-label">Self</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="github-pages" data-category="useless" data-name="GitHub Pages">
+            <div class="monitor-header">
+                <h2>GitHub Pages</h2>
+                <span class="service-label">GitHub</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="github-status" data-category="github" data-name="GitHub Status">
+            <div class="monitor-header">
+                <h2>GitHub Status</h2>
+                <span class="service-label">GitHub</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="cloudflare" data-category="network" data-name="Cloudflare">
+            <div class="monitor-header">
+                <h2>Cloudflare</h2>
+                <span class="service-label">CDN</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="aws" data-category="cloud" data-name="AWS">
+            <div class="monitor-header">
+                <h2>AWS</h2>
+                <span class="service-label">Cloud</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="discord" data-category="social" data-name="Discord">
+            <div class="monitor-header">
+                <h2>Discord</h2>
+                <span class="service-label">Social</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="google" data-category="other" data-name="Google">
+            <div class="monitor-header">
+                <h2>Google</h2>
+                <span class="service-label">Search</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="microsoft" data-category="other" data-name="Microsoft">
+            <div class="monitor-header">
+                <h2>Microsoft</h2>
+                <span class="service-label">Tech</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="azure" data-category="cloud" data-name="Azure">
+            <div class="monitor-header">
+                <h2>Azure</h2>
+                <span class="service-label">Cloud</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="hackclub" data-category="community" data-name="Hack Club">
+            <div class="monitor-header">
+                <h2>Hack Club</h2>
+                <span class="service-label">Community</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="slack" data-category="other" data-name="Slack">
+            <div class="monitor-header">
+                <h2>Slack</h2>
+                <span class="service-label">Work</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="steam" data-category="gaming" data-name="Steam">
+            <div class="monitor-header">
+                <h2>Steam</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="epic-games" data-category="gaming" data-name="Epic Games">
+            <div class="monitor-header">
+                <h2>Epic Games</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="fortnite" data-category="gaming" data-name="Fortnite">
+            <div class="monitor-header">
+                <h2>Fortnite</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="minecraft" data-category="gaming" data-name="Minecraft">
+            <div class="monitor-header">
+                <h2>Minecraft</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="twitch" data-category="video" data-name="Twitch">
+            <div class="monitor-header">
+                <h2>Twitch</h2>
+                <span class="service-label">Video</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="youtube" data-category="video" data-name="YouTube">
+            <div class="monitor-header">
+                <h2>YouTube</h2>
+                <span class="service-label">Video</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="flavortown" data-category="community" data-name="Flavortown">
+            <div class="monitor-header">
+                <h2>Flavortown</h2>
+                <span class="service-label">Hack Club</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="scraps" data-category="community" data-name="Scraps">
+            <div class="monitor-header">
+                <h2>Scraps</h2>
+                <span class="service-label">Hack Club</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="blueprint" data-category="community" data-name="Blueprint">
+            <div class="monitor-header">
+                <h2>Blueprint</h2>
+                <span class="service-label">Hack Club</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="gmail" data-category="other" data-name="Gmail">
+            <div class="monitor-header">
+                <h2>Gmail</h2>
+                <span class="service-label">Email</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="hcb" data-category="community" data-name="HCB">
+            <div class="monitor-header">
+                <h2>HCB</h2>
+                <span class="service-label">Hack Club</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="whatsapp" data-category="social" data-name="WhatsApp">
+            <div class="monitor-header">
+                <h2>WhatsApp</h2>
+                <span class="service-label">Social</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="spotify" data-category="social" data-name="Spotify">
+            <div class="monitor-header">
+                <h2>Spotify</h2>
+                <span class="service-label">Music</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="playstation-network" data-category="gaming" data-name="PlayStation Network">
+            <div class="monitor-header">
+                <h2>PlayStation Network</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="xbox" data-category="gaming" data-name="Xbox">
+            <div class="monitor-header">
+                <h2>Xbox</h2>
+                <span class="service-label">Gaming</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="nasa" data-category="useless" data-name="NASA">
+            <div class="monitor-header">
+                <h2>NASA</h2>
+                <span class="service-label">Space</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="oracle" data-category="cloud" data-name="Oracle">
+            <div class="monitor-header">
+                <h2>Oracle</h2>
+                <span class="service-label">Cloud</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="example" data-category="useless" data-name="Example.com">
+            <div class="monitor-header">
+                <h2>Example.com</h2>
+                <span class="service-label">Useless</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="google-play" data-category="other" data-name="Google Play">
+            <div class="monitor-header">
+                <h2>Google Play</h2>
+                <span class="service-label">Store</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="chrome-web-store" data-category="other" data-name="Chrome Web Store">
+            <div class="monitor-header">
+                <h2>Chrome Web Store</h2>
+                <span class="service-label">Store</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="mozilla" data-category="other" data-name="Mozilla">
+            <div class="monitor-header">
+                <h2>Mozilla</h2>
+                <span class="service-label">Browser</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="firefox-addons" data-category="other" data-name="Firefox Add-ons">
+            <div class="monitor-header">
+                <h2>Firefox Add-ons</h2>
+                <span class="service-label">Store</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="openai" data-category="ai" data-name="OpenAI">
+            <div class="monitor-header">
+                <h2>OpenAI</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="anthropic" data-category="ai" data-name="Anthropic Claude">
+            <div class="monitor-header">
+                <h2>Anthropic Claude</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="google-gemini" data-category="ai" data-name="Google Gemini">
+            <div class="monitor-header">
+                <h2>Google Gemini</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="github-copilot" data-category="ai" data-name="GitHub Copilot">
+            <div class="monitor-header">
+                <h2>GitHub Copilot</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="microsoft-copilot" data-category="ai" data-name="Microsoft Copilot">
+            <div class="monitor-header">
+                <h2>Microsoft Copilot</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="midjourney" data-category="ai" data-name="Midjourney">
+            <div class="monitor-header">
+                <h2>Midjourney</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="perplexity" data-category="ai" data-name="Perplexity">
+            <div class="monitor-header">
+                <h2>Perplexity</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor-card" data-service="huggingface" data-category="ai" data-name="Hugging Face">
+            <div class="monitor-header">
+                <h2>Hugging Face</h2>
+                <span class="service-label">AI</span>
+            </div>
+            <div class="monitor-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking...</span>
+                </div>
+            </div>
+            <div class="monitor-stats">
+                <div class="stat">
+                    <span class="stat-label">Uptime</span>
+                    <span class="stat-value" data-stat="uptime">-</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Response</span>
+                    <span class="stat-value" data-stat="response">-</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 SeradedStripes — Public API available at /api/v1/status/</p>
+        </div>
+    </footer>
+
+    <script src="api/v1/check.js"></script>
+    <script src="api/v1/self.js"></script>
+    <script src="core/classify.js"></script>
+    <script src="core/confidence.js"></script>
+    <script src="core/timing.js"></script>
+    <script src="ui/themes.js"></script>
+    <script src="ui/render.js"></script>
+    <script>
+        document.querySelectorAll('[data-transition]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                const href = link.getAttribute('href');
+                if (!href) return;
+                event.preventDefault();
+                document.body.classList.add('page-fade-out');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 200);
+            });
+        });
+        
+        // Initialize renderer on page load
+        window.addEventListener('load', () => {
+            if (typeof Render !== 'undefined') {
+                Render.init();
+            }
+        });
+    </script>
+</body>
+</html>

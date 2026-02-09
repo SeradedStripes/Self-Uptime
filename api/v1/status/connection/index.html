@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Status</title>
+</head>
+<body>
+<pre id="output">Loading...</pre>
+
+<script>
+    function setOutput(payload) {
+        document.getElementById('output').textContent = JSON.stringify(payload, null, 2);
+    }
+
+    async function run() {
+        try {
+            await ISPAPI.init();
+            const data = ISPAPI.getStatus();
+            setOutput({
+                success: true,
+                timestamp: new Date().toISOString(),
+                data
+            });
+        } catch (error) {
+            setOutput({
+                success: false,
+                error: error.message,
+                timestamp: new Date().toISOString()
+            });
+        }
+    }
+
+    (function loadIspApi() {
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        const root = parts.length === 0 ? window.location.origin + '/' : window.location.origin + '/' + parts[0] + '/';
+        const script = document.createElement('script');
+        script.src = root + 'api/v1/isp.js';
+        script.onload = run;
+        script.onerror = () => setOutput({
+            success: false,
+            error: 'Failed to load api/v1/isp.js',
+            timestamp: new Date().toISOString()
+        });
+        document.head.appendChild(script);
+    })();
+</script>
+</body>
+</html>
